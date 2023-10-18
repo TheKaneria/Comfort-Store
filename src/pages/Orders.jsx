@@ -26,7 +26,7 @@ const ordersQuery = (params, user) => {
 };
 
 export const loader =
-  (store,queryClient) =>
+  (store, queryClient) =>
   async ({ request }) => {
     const user = store.getState().userState.user;
 
@@ -39,11 +39,12 @@ export const loader =
     ]);
 
     try {
-      const response = await queryClient.ensureQueryData(ordersQuery(params,user))
-       console.log(response);
+      const response = await queryClient.ensureQueryData(
+        ordersQuery(params, user)
+      );
+
       return { orders: response.data.data, meta: response.data.meta };
     } catch (error) {
-      console.log(error);
       const errorMessage =
         error?.response?.data?.error?.message ||
         "there was an error placing your order";
